@@ -10,6 +10,7 @@
       background-color: #f4f4f9;
       margin: 0;
       padding: 20px;
+      color: #444;
     }
     h1 {
       text-align: center;
@@ -74,16 +75,16 @@
       const movieList = document.getElementById("movie-list");
       movieList.innerHTML = "";
 
-      movieData.forEach(movie => {
+      movieData.forEach((movie, index) => {
         const listItem = document.createElement("li");
 
         const title = document.createElement("span");
         title.className = "title";
-        title.textContent = movie.title;
+        title.textContent = `${index + 1}. ${movie.title}`;
 
         const rating = document.createElement("span");
         rating.className = "rating";
-        rating.textContent = `Оцінка: ${movie.rating}`;
+        rating.textContent = `${movie.rating}`;
 
         listItem.appendChild(title);
         listItem.appendChild(rating);
@@ -96,3 +97,9 @@
   </script>
 </body>
 </html>
+
+<!-- https://www.radix-ui.com/primitives/docs/components/progress додати?
+Вкладки з жанрами?
+жанр - третя характеристика в json
+через пошук "rating" і заміну на "genre": "fantasy" і тд
+-->
