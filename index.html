@@ -4,102 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Рейтинг фільмів</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f9;
-      margin: 0;
-      padding: 20px;
-      color: #444;
-    }
-    h1 {
-      text-align: center;
-      color: #333;
-    }
-    ul {
-      list-style-type: none;
-      padding: 0;
-      max-width: 600px;
-      margin: 20px auto;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-    li {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 20px;
-      border-bottom: 1px solid #ddd;
-    }
-    li:last-child {
-      border-bottom: none;
-    }
-    .title {
-      font-weight: bold;
-    }
-    .rating {
-      color: #555;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <h1>Рейтинг фільмів</h1>
+  <nav>
+    <button class="tab-button active" data-genre="all">Загальний рейтинг</button>
+    <button class="tab-button" data-genre="action">Екшн</button>
+    <button class="tab-button" data-genre="fantasy">Фентезі</button>
+    <button class="tab-button" data-genre="drama">Драми</button>
+    <button class="tab-button" data-genre="comedy">Комедія</button>
+    <button class="tab-button" data-genre="crime">Кримінальний/детектив</button>
+    <button class="tab-button" data-genre="history">Історичний/документальний</button>
+    <button class="tab-button" data-genre="horror">Горор</button>
+    <button class="tab-button" data-genre="sci-fi">Фантастика</button>
+    <button class="tab-button" data-genre="thriller">Триллер</button>
+    <button class="tab-button" data-genre="serias">Серіали</button>
+    <button class="tab-button" data-genre="anime">Аніме</button>
+    <button class="tab-button" data-genre="cartoon">Мультфільми</button>
+    <button class="tab-button" data-genre="movie">Фільми</button>
+    <button class="tab-button" data-genre="chistian">Християнські</button>
+  </nav>
   <ul id="movie-list"></ul>
 
-  <script>
-    // Функція для завантаження JSON-даних
-    async function loadMovies() {
-      try {
-        const response = await fetch('movies.json'); // Завантаження файлу
-        if (!response.ok) {
-          throw new Error(`HTTP помилка! Статус: ${response.status}`);
-        }
-        const movies = await response.json();
-        sortAndDisplayMovies(movies);
-      } catch (error) {
-        console.error("Помилка при завантаженні фільмів:", error);
-      }
-    }
-
-    // Функція для сортування та відображення списку фільмів
-    function sortAndDisplayMovies(movieData) {
-      // Сортування спочатку за оцінкою, потім за назвою
-      movieData.sort((a, b) => {
-        if (b.rating !== a.rating) {
-          return b.rating - a.rating; // Сортування за оцінкою (зменшення)
-        }
-        return a.title.localeCompare(b.title); // Сортування за алфавітом
-      });
-
-      // Відображення списку
-      const movieList = document.getElementById("movie-list");
-      movieList.innerHTML = "";
-
-      movieData.forEach((movie, index) => {
-        const listItem = document.createElement("li");
-
-        const title = document.createElement("span");
-        title.className = "title";
-        title.textContent = `${index + 1}. ${movie.title}`;
-
-        const rating = document.createElement("span");
-        rating.className = "rating";
-        rating.textContent = `${movie.rating}`;
-
-        listItem.appendChild(title);
-        listItem.appendChild(rating);
-        movieList.appendChild(listItem);
-      });
-    }
-
-    // Викликаємо функцію для завантаження фільмів
-    loadMovies();
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
-
-<!-- https://www.radix-ui.com/primitives/docs/components/progress додати?
-Вкладки з жанрами?
-жанр - третя характеристика в json
-через пошук "rating" і заміну на "genre": "fantasy" і тд
--->
