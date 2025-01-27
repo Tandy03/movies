@@ -9,23 +9,15 @@
 <body>
   <h1>Рейтинг фільмів</h1>
   <nav>
-    <button class="tab-button active" data-genre="all">General</button>
-    <button class="tab-button" data-genre="action">Action</button>
-    <button class="tab-button" data-genre="fantasy">Fantasy</button>
-    <button class="tab-button" data-genre="drama">Drama</button>
-    <button class="tab-button" data-genre="comedy">Comedy</button>
-    <button class="tab-button" data-genre="crime">Crime/Detective</button>
-    <button class="tab-button" data-genre="history">Historical/Documentary</button>
-    <button class="tab-button" data-genre="horror">Horror</button>
-    <button class="tab-button" data-genre="sci-fi">Sci-fi</button> <!--includes antiutopias -->
-    <button class="tab-button" data-genre="thriller">Thriller</button>
-    <button class="tab-button" data-genre="serias">Serias</button>
-    <button class="tab-button" data-genre="anime">Anime</button>
-    <button class="tab-button" data-genre="cartoon">Cartoons</button>
-    <button class="tab-button" data-genre="movie">Movies</button>
-    <button class="tab-button" data-genre="christian">Christian</button>
+    <button class="tab-button active" data-tab="general">General</button>
+    <button class="tab-button" data-tab="by-genres">By Genres</button>
+    <button class="tab-button" data-tab="movies">Movies</button>
+    <button class="tab-button" data-tab="cartoons">Cartoons</button>
   </nav>
-  <ul id="movie-list"></ul>
+  <div id="content">
+    <!-- Вміст вкладок буде динамічно змінюватися -->
+    <ul id="movie-list"></ul>
+  </div>
 
   <script src="script.js"></script>
 </body>
