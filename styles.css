@@ -20,6 +20,7 @@ nav {
 
 .tab-button {
   padding: 10px 15px;
+  width: 10%;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -74,4 +75,79 @@ li:last-child {
   gap: 10px;
   justify-content: center;
   margin-top: 10px;
+}
+
+/* @media (max-width: 800px) {
+  nav {
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .tab-button {
+    width: 40%;
+  }
+
+  #content {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  li {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .genre-buttons {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .genre-button {
+    width: 30%;
+  }
+} */
+
+@media (max-width: 800px) {
+  nav {
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .tab-button {
+    width: 40%;
+  }
+
+  #content {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  li {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .genre-buttons {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .genre-button {
+    width: 30%;
+  }
+}
+
+@media (max-width: 450px) {
+  .genre-buttons {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .genre-button {
+    width: 40%;
+  }
 }
