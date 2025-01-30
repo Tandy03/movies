@@ -1,5 +1,3 @@
-//todo sorting up-down button (exclude 0`s)
-
 // Завантаження JSON-даних
 async function loadMovies() {
   try {

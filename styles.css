@@ -7,8 +7,14 @@ body {
 }
 
 h1 {
+  align-items: center;
   text-align: center;
   color: #333;
+}
+
+#movieIcon {
+  margin-left: 8px;
+  margin-bottom: -2.5px;
 }
 
 nav {
@@ -77,37 +83,20 @@ li:last-child {
   margin-top: 10px;
 }
 
-/* @media (max-width: 800px) {
-  nav {
-    align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+.sort-button {
+  display: block;
+  margin: 10px auto;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
 
-  .tab-button {
-    width: 40%;
-  }
-
-  #content {
-    max-width: 100%;
-    padding: 10px;
-  }
-
-  li {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .genre-buttons {
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .genre-button {
-    width: 30%;
-  }
-} */
+.sort-button svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
 
 @media (max-width: 800px) {
   nav {
