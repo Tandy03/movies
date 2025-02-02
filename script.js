@@ -33,12 +33,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function renderMovies(movies) {
       content.innerHTML = "";
-      movies.forEach(movie => {
+      movies.forEach((movie, index) => {
           const li = document.createElement("li");
           li.id = "list"; // Додаємо id="list" до кожного елемента <li>
           
           const titleDiv = document.createElement("div");
-          titleDiv.textContent = movie.title;
+          titleDiv.textContent = `${index + 1}. ${movie.title}`;
           
           const ratingDiv = document.createElement("div");
           ratingDiv.textContent = movie.rating;

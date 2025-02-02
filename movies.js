@@ -1124,7 +1124,8 @@ const moviesList = [
     { title: "Мертві, як я (с, 1-2)", genre: ["fantasy", "comedy", "series"], rating: 9.2 },
     { title: "Мертві, як я (с, 1-2)", genre: ["fantasy", "comedy", "movie"], rating: 8.99 },
     { title: "Один день (2011)", genre: ["drama", "movie"], rating: 9.2 },
-    { title: "Дулітл", genre: ["comedy", "fantasy", "movie"], rating: 9.2 }
+    { title: "Дулітл", genre: ["comedy", "fantasy", "movie"], rating: 9.2 },
+    { title: "Монте Карло", genre: ["comedy", "movie"], rating: 9 }
   ];
             
 
