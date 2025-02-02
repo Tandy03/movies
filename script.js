@@ -1,209 +1,133 @@
-// Завантаження JSON-даних
-async function loadMovies() {
-  try {
-    const response = await fetch("movies.json");
-    if (!response.ok) {
-      throw new Error(`HTTP помилка! Статус: ${response.status}`);
-    }
-    const movies = await response.json();
-    initializeTabs(movies);
-  } catch (error) {
-    console.error("Помилка при завантаженні фільмів:", error);
-  }
-}
+import moviesList from "./movies.js";
 
-// Ініціалізація вкладок
-function initializeTabs(movies) {
-  const buttons = document.querySelectorAll(".tab-button");
+//todo сортування списку по оцінці
+//todo кнопки жанрів не повинні зникати при виборі якогось жанру
+//todo кнопки жанрів надто далеко від кнопок вкладок
 
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      buttons.forEach((btn) => btn.classList.remove("active"));
-      button.classList.add("active");
-      const tab = button.dataset.tab;
-      displayTabContent(movies, tab);
-    });
-  });
 
-  displayTabContent(movies, "general");
-}
 
-// Відображення вмісту залежно від обраної вкладки
-function displayTabContent(movies, tab) {
-  const content = document.getElementById("content");
-  content.innerHTML = '<div class="genre-buttons"></div><ul id="movie-list"></ul>';
-  
-  const movieList = document.getElementById("movie-list");
-  movieList.innerHTML = "";
-  const genreButtons = document.querySelector(".genre-buttons");
 
-  if (tab === "general") {
-    displayMovies(movies);
-  } else if (tab === "by-genres") {
-    displayGenres(movies);
-  } else if (tab === "movies") {
-    displayMovieGenres(movies);
-  } else if (tab === "cartoons") {
-    displayCartoons(movies);
-  }
-}
 
-// Відображення кнопок жанрів у вкладці Movies
-function displayMovieGenres(movies) {
-  const content = document.getElementById("content");
-  content.innerHTML = `
-    <div class="genre-buttons">
-      <button class="genre-button" data-genre="all-movies">Всі фільми</button>
-      <button class="genre-button" data-genre="drama">Драма/Мелодрама</button>
-      <button class="genre-button" data-genre="thriller">Трилер</button>
-      <button class="genre-button" data-genre="fantasy">Фентезі</button>
-      <button class="genre-button" data-genre="christian">Християнські</button>
-      <button class="genre-button" data-genre="history">Історичні/Документальні</button>
-      <button class="genre-button" data-genre="sci-fi">Наукова фантастика</button>
-      <button class="genre-button" data-genre="action">Екшн</button>
-      <button class="genre-button" data-genre="crime">Кримінальні/Детективи</button>
-      <button class="genre-button" data-genre="comedy">Комедія</button>
-      <button class="genre-button" data-genre="horror">Жахи</button>
-    </div>
-    <ul id="movie-list"></ul>
-  `;
 
-  const genreButtons = document.querySelectorAll(".genre-button");
+document.addEventListener("DOMContentLoaded", () => {
+    const content = document.getElementById("movie-list");
+    const genreButtonsContainer = document.createElement("div");
+    const tabs = document.querySelectorAll(".tab-button");
+    const sortButton = document.getElementById("sort-button");
+    const sortIcon = document.getElementById("sort-icon");
 
-  // Кнопка для перегляду всіх фільмів з жанром "movie"
-  const allMoviesButton = document.querySelector("[data-genre='all-movies']");
-  allMoviesButton.addEventListener("click", () => {
-    const filteredMovies = movies.filter((movie) => movie.genre.toLowerCase().includes("movie"));
-    displayMovies(filteredMovies);
-  });
-
-  // Додавання обробників для кожної кнопки жанру
-  genreButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const genre = button.dataset.genre;
-      let filteredMovies;
-
-      if (genre === "all-movies") {
-        filteredMovies = movies.filter((movie) => movie.genre.toLowerCase().includes("movie"));
-      } else {
-        filteredMovies = movies.filter((movie) =>
-          movie.genre.toLowerCase().includes("movie") && movie.genre.toLowerCase().includes(genre)
-        );
-      }
-
-      displayMovies(filteredMovies);
-    });
-  });
-
-  // Фільтруємо фільми за жанром "movie"
-  const movieGenres = movies.filter((movie) => movie.genre.toLowerCase().includes("movie"));
-  displayMovies(movieGenres);
-}
-
-// Відображення мультфільмів
-function displayCartoons(movies) {
-  const content = document.getElementById("content");
-  content.innerHTML = `
-    <div class="genre-buttons">
-      <button class="genre-button" data-genre="general">Всі</button>
-      <button class="genre-button" data-genre="just-cartoons">Мультфільми</button>
-      <button class="genre-button" data-genre="anime">Аніме</button>
-    </div>
-    <ul id="movie-list"></ul>
-  `;
-
-  document.querySelectorAll(".genre-button").forEach((button) => {
-    button.addEventListener("click", () => {
-      let genre = button.dataset.genre;
-      let filteredMovies;
-      if (genre === "general") {
-        filteredMovies = movies.filter((movie) =>
-          movie.genre.toLowerCase().includes("cartoon") ||
-          movie.genre.toLowerCase().includes("anime")
-        );
-      } else if (genre === "just-cartoons") {
-        filteredMovies = movies.filter((movie) =>
-          movie.genre.toLowerCase().includes("cartoon") &&
-          !movie.genre.toLowerCase().includes("anime")
-        );
-      } else {
-        filteredMovies = movies.filter((movie) =>
-          movie.genre.toLowerCase().includes("anime")
-        );
-      }
-      displayMovies(filteredMovies);
-    });
-  });
-}
-
-// Відображення списку фільмів
-function displayMovies(movieData) {
-  const movieList = document.getElementById("movie-list");
-  movieList.innerHTML = "";
-
-  movieData
-    .sort((a, b) => b.rating - a.rating)
-    .forEach((movie, index) => {
-      const listItem = document.createElement("li");
-
-      const title = document.createElement("span");
-      title.className = "title";
-      title.textContent = `${index + 1}. ${movie.title}`;
-
-      const rating = document.createElement("span");
-      rating.className = "rating";
-      rating.textContent = `${movie.rating}`;
-
-      listItem.appendChild(title);
-      listItem.appendChild(rating);
-      movieList.appendChild(listItem);
-    });
-}
-
-// Відображення кнопок жанрів у вкладці By Genres
-function displayGenres(movies) {
-  const content = document.getElementById("content");
-  content.innerHTML = '<div class="genre-buttons"></div><ul id="movie-list"></ul>';
-
-  const genreButtons = document.querySelector(".genre-buttons");
-  const excludedGenres = ["movie", "cartoon", "series", "anime"];
-  const genres = [...new Set(
-    movies
-      .flatMap((movie) => movie.genre.split(",").map((g) => g.trim().toLowerCase()))
-      .filter((genre) => !excludedGenres.includes(genre))
-  )];
-
-  genres.forEach((genre) => {
-    const button = document.createElement("button");
-    button.className = "genre-button";
-    
-    const genreNames = {
-      drama: "Драма/Мелодрама",
-      thriller: "Трилер",
-      fantasy: "Фентезі",
-      christian: "Християнські",
-      history: "Історичні/Документальні",
-      "sci-fi": "Наукова фантастика",
-      action: "Екшн",
-      crime: "Кримінальні/Детективи",
-      comedy: "Комедія",
-      horror: "Жахи"
+    const genres = {
+        "drama": "Драма/Мелодрама",
+        "thriller": "Трилер",
+        "fantasy": "Фентезі",
+        "christian": "Християнські",
+        "history": "Історичні/Документальні",
+        "sci-fi": "Наукова фантастика",
+        "action": "Екшн",
+        "crime": "Кримінальні/Детективи",
+        "comedy": "Комедія",
+        "horror": "Жахи"
     };
-    
-    button.textContent = genreNames[genre] || genre.charAt(0).toUpperCase() + genre.slice(1);  // Якщо нема відповідного жанру, відображаємо оригінальний текст
-    button.dataset.genre = genre;
 
-    button.addEventListener("click", () => {
-      const filteredMovies = movies.filter((movie) =>
-        movie.genre.toLowerCase().includes(genre)
-      );
-      displayMovies(filteredMovies);
+    let isAscending = false;
+
+    function renderMovies(movies) {
+      content.innerHTML = "";
+      movies.forEach(movie => {
+          const li = document.createElement("li");
+          li.id = "list"; // Додаємо id="list" до кожного елемента <li>
+          
+          const titleDiv = document.createElement("div");
+          titleDiv.textContent = movie.title;
+          
+          const ratingDiv = document.createElement("div");
+          ratingDiv.textContent = movie.rating;
+          
+          li.appendChild(titleDiv);
+          li.appendChild(ratingDiv);
+          
+          content.appendChild(li);
+      });
+  }
+  
+
+    function filterMoviesByGenre(genre) {
+        return moviesList.filter(movie => movie.genre.includes(genre));
+    }
+
+    function createGenreButtons(filterFunction) {
+        genreButtonsContainer.innerHTML = "";
+        Object.entries(genres).forEach(([key, value]) => {
+            const button = document.createElement("button");
+            button.textContent = value;
+            button.addEventListener("click", () => {
+                renderMovies(filterFunction(key));
+            });
+            genreButtonsContainer.appendChild(button);
+        });
+        content.appendChild(genreButtonsContainer);
+    }
+
+    function sortMovies(movies, ascending) {
+        const filteredMovies = ascending
+            ? movies.filter(movie => movie.rating > 0).sort((a, b) => a.rating - b.rating)
+            : movies.sort((a, b) => b.rating - a.rating);
+        renderMovies(filteredMovies);
+    }
+
+    sortButton.addEventListener("click", () => {
+        isAscending = !isAscending;
+        sortIcon.innerHTML = isAscending 
+            ? `<svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 2C7.77614 2 8 2.22386 8 2.5L8 11.2929L11.1464 8.14645C11.3417 7.95118 11.6583 7.95118 11.8536 8.14645C12.0488 8.34171 12.0488 8.65829 11.8536 8.85355L7.85355 12.8536C7.75979 12.9473 7.63261 13 7.5 13C7.36739 13 7.24021 12.9473 7.14645 12.8536L3.14645 8.85355C2.95118 8.65829 2.95118 8.34171 3.14645 8.14645C3.34171 7.95118 3.65829 7.95118 3.85355 8.14645L7 11.2929L7 2.5C7 2.22386 7.22386 2 7.5 2Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>`
+            : `<svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.14645 2.14645C7.34171 1.95118 7.65829 1.95118 7.85355 2.14645L11.8536 6.14645C12.0488 6.34171 12.0488 6.65829 11.8536 6.85355C11.6583 7.04882 11.3417 7.04882 11.1464 6.85355L8 3.70711L8 12.5C8 12.7761 7.77614 13 7.5 13C7.22386 13 7 12.7761 7 12.5L7 3.70711L3.85355 6.85355C3.65829 7.04882 3.34171 7.04882 3.14645 6.85355C2.95118 6.65829 2.95118 6.34171 3.14645 6.14645L7.14645 2.14645Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>`;
+
+        sortMovies([...moviesList], isAscending);
     });
 
-    genreButtons.appendChild(button);
-  });
-}
+    tabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+            tabs.forEach(t => t.classList.remove("active"));
+            tab.classList.add("active");
+            const tabName = tab.dataset.tab;
 
+            content.innerHTML = "";
+            if (tabName === "general") {
+                sortMovies([...moviesList], isAscending);
+                sortButton.id = "sort-button";
+            } else if (tabName === "by-genres") {
+                createGenreButtons(filterMoviesByGenre);
+                sortButton.id = "sort-button-hidden";
+            } else if (tabName === "movies") {
+                const moviesContainer = document.createElement("div");
+                const allMoviesButton = document.createElement("button");
+                allMoviesButton.textContent = "Всі фільми";
+                allMoviesButton.addEventListener("click", () => {
+                    renderMovies(filterMoviesByGenre("movie"));
+                });
+                moviesContainer.appendChild(allMoviesButton);
+                content.appendChild(moviesContainer);
+                createGenreButtons(filterMoviesByGenre);
+                sortButton.id = "sort-button-hidden";
+            } else if (tabName === "cartoons") {
+                content.innerHTML = `
+                    <button id="all-cartoons">Усі мультфільми</button>
+                    <button id="only-cartoons">Тільки мультфільми</button>
+                    <button id="anime">Аніме</button>
+                `;
+                document.getElementById("all-cartoons").addEventListener("click", () => {
+                    renderMovies(filterMoviesByGenre("cartoon"));
+                });
+                document.getElementById("only-cartoons").addEventListener("click", () => {
+                    renderMovies(filterMoviesByGenre("cartoon").filter(movie => !movie.genre.includes("anime")));
+                });
+                document.getElementById("anime").addEventListener("click", () => {
+                    renderMovies(filterMoviesByGenre("anime"));
+                });
+                sortButton.id = "sort-button-hidden";
+            }
+        });
+    });
 
-// Завантаження фільмів
-loadMovies();
+    // Завантаження початкового списку
+    sortMovies([...moviesList], isAscending);
+});

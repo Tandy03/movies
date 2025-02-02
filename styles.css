@@ -1,14 +1,12 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
+  text-align: center;
+  background-color: #f5f5f5;
   margin: 0;
   padding: 20px;
-  color: #444;
 }
 
 h1 {
-  align-items: center;
-  text-align: center;
   color: #333;
 }
 
@@ -17,85 +15,73 @@ h1 {
   margin-bottom: -2.5px;
 }
 
-nav {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
+#sort-button {
+  opacity: 100%;
 }
 
-.tab-button {
-  padding: 10px 15px;
-  width: 10%;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+#sort-button-hidden {
+  opacity: 0;
+}
+
+nav {
+  margin: 20px 0;
+}
+
+button {
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  background-color: #007bff;
+  color: white;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #0056b3;
 }
 
 .tab-button.active {
-  background-color: #007bff;
-  color: #fff;
-}
-
-.tab-button:hover {
-  background-color: #e0e0e0;
+  background-color: #28a745;
 }
 
 #content {
-  max-width: 600px;
-  margin: 0 auto;
+  margin-top: 20px;
 }
 
 ul {
   list-style-type: none;
   padding: 0;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 li {
+  background: white;
+  margin: 5px auto;
+  padding: 10px;
+  border-radius: 5px;
+  width: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+#list {
   display: flex;
-  justify-content: space-between;
-  padding: 10px 20px;
-  border-bottom: 1px solid #ddd;
+  justify-content: space-between; /* Розміщує елементи по боках */
+  margin: 10px 0; /* Зробити трохи відступу між елементами */
+  margin-left: auto;
+  margin-right: auto;
 }
 
-li:last-child {
-  border-bottom: none;
+#list div {
+  display: inline-block;
+  padding: 5px; /* Відступи між текстом і краєм */
 }
 
-.title {
-  font-weight: bold;
+#list div:first-child {
+  text-align: left; /* Назва фільму ліворуч */
 }
 
-.rating {
-  color: #555;
-}
-
-.genre-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-  margin-top: 10px;
-}
-
-.sort-button {
-  display: block;
-  margin: 10px auto;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.sort-button svg {
-  width: 20px;
-  height: 20px;
-  fill: currentColor;
+#list div:last-child {
+  text-align: right; /* Оцінка праворуч */
 }
 
 @media (max-width: 800px) {
@@ -107,7 +93,7 @@ li:last-child {
   }
 
   .tab-button {
-    width: 40%;
+    width: 34%;
   }
 
   #content {
