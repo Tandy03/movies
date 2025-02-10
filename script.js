@@ -1,14 +1,5 @@
 import moviesList from "./movies.js";
 
-//todo сортування списку по оцінці
-//todo кнопки жанрів не повинні зникати при виборі якогось жанру
-//todo кнопки жанрів надто далеко від кнопок вкладок
-
-
-
-
-
-
 document.addEventListener("DOMContentLoaded", () => {
     const content = document.getElementById("movie-list");
     const genreButtonsContainer = document.createElement("div");
@@ -35,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
       content.innerHTML = "";
       movies.forEach((movie, index) => {
           const li = document.createElement("li");
-          li.id = "list"; // Додаємо id="list" до кожного елемента <li>
+          li.id = "list";
           
           const titleDiv = document.createElement("div");
           titleDiv.textContent = `${index + 1}. ${movie.title}`;
@@ -128,6 +119,5 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Завантаження початкового списку
     sortMovies([...moviesList], isAscending);
 });
