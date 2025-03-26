@@ -1,128 +1,70 @@
 body {
   font-family: Arial, sans-serif;
-  text-align: center;
-  background-color: #f5f5f5;
+  background-color: rgb(45,40,33);
   margin: 0;
   padding: 20px;
+  text-align: center;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  background: rgb(210, 215, 222);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-  color: #333;
+  color: rgb(35, 32, 27);
 }
 
-#movieIcon {
-  margin-left: 8px;
-  margin-bottom: -2.5px;
+.tabs {
+  margin-bottom: 10px;
 }
 
-#sort-button {
-  opacity: 100%;
-}
-
-#sort-button-hidden {
-  display: none;
-}
-
-nav {
-  margin: 20px 0;
-}
-
-button {
+.tabs button {
   margin: 5px;
-  padding: 10px;
-  border: none;
-  background-color: #007bff;
-  color: white;
+  padding: 10px 15px;
   cursor: pointer;
+  border: none;
+  background: #ddd;
   border-radius: 5px;
+  color: rgb(35, 32, 27);
+  border: 1px solid rgb(173, 173, 173);
 }
 
-button:hover {
-  background-color: #0056b3;
+.tabs button.active {
+  background: rgb(45,40,33);
+  color: white;
 }
 
-.tab-button.active {
-  background-color: #28a745;
+.filters {
+  margin: 10px 0;
 }
 
-#content {
-  margin-top: 20px;
+#genreFilter, #sortToggle {
+  padding: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  background: rgb(216, 216, 216);
+  border: 1px solid rgb(173, 173, 173);
 }
 
 ul {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
 }
 
 li {
-  background: white;
-  margin: 5px auto;
+  background: rgb(216, 216, 216);
   padding: 10px;
+  margin: 5px 0;
   border-radius: 5px;
-  width: 50%;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  color: rgb(35, 32, 27);
 }
 
-#list {
-  display: flex;
-  justify-content: space-between; /* Розміщує елементи по боках */
-  margin: 10px 0; /* Зробити трохи відступу між елементами */
-  margin-left: auto;
-  margin-right: auto;
-}
-
-#list div {
-  display: inline-block;
-  padding: 5px; /* Відступи між текстом і краєм */
-}
-
-#list div:first-child {
-  text-align: left; /* Назва фільму ліворуч */
-}
-
-#list div:last-child {
-  text-align: right; /* Оцінка праворуч */
-}
-
-@media (max-width: 800px) {
-  nav {
-    align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .tab-button {
-    width: 34%;
-  }
-
-  #content {
-    max-width: 100%;
-    padding: 10px;
-  }
-
-  li {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .genre-buttons {
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .genre-button {
-    width: 30%;
-  }
-}
-
-@media (max-width: 450px) {
-  .genre-buttons {
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .genre-button {
-    width: 40%;
-  }
+#movieIcon {
+  margin-bottom: -0.15rem;
 }

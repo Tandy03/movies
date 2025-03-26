@@ -1,4 +1,4 @@
-const moviesList = [
+export const moviesList = [
     { title: "Меню (2022)", genre: ["drama", "thriller", "movie"], rating: 10 },
     { title: "Дощовий день у Нью-Йорку", genre: ["drama", "movie"], rating: 9.9 },
     { title: "Абатство Даунтон (с, 1-6)", genre: ["history", "drama", "series"], rating: 9.8 },
@@ -1153,7 +1153,7 @@ const moviesList = [
     { title: "Артур і Мерлін: Лицарі Камелота", genre: ["fantasy", "history", "movie"], rating: 9 },
     { title: "Вечірня школа", genre: ["comedy", "movie"], rating: 8.6 },
     { title: "Клуб 'Сніданок'", genre: ["comedy", "movie"], rating: 7.6 },
-    { title: "Береза", genre: ["fantasy", "horror", "movie"], rating: 8.8 },
+    { title: "Береза", genre: ["fantasy", "horror", "movie"], rating: 0 },
     { title: "Кавалерія / 12 сильних", genre: ["history", "action", "movie"], rating: 9.3 },
     { title: "Половина всього", genre: ["drama", "movie"], rating: 8.01 },
     { title: "Війна проти всіх", genre: ["crime", "comedy", "movie"], rating: 8.1 },
