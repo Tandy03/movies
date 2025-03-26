@@ -41,10 +41,12 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
+        if (isAscending) {
+            filteredMovies = filteredMovies.filter(movie => movie.rating > 0);
+        }
+
         return filteredMovies.sort((a, b) => {
-            if (!isAscending) return b.rating - a.rating; // Від найвищого до найнижчого (з 0)
-            if (a.rating === 0) return 1; // Ховаємо 0 при зворотному сортуванні
-            if (b.rating === 0) return -1;
+            if (!isAscending) return b.rating - a.rating;
             return a.rating - b.rating;
         });
     }
