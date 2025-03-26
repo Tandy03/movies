@@ -54,7 +54,11 @@ document.addEventListener("DOMContentLoaded", () => {
         movieListElement.innerHTML = movies.length
             ? movies.map(movie => {
                 const translatedGenres = movie.genre.map(g => genreTranslations[g] || g).join(", ");
-                return `<li><strong>${movie.title}</strong> <br> Жанр: ${translatedGenres} <br> Рейтинг: ${movie.rating}</li>`;
+                return `<li>
+                          <span class="movie-title">${movie.title}</span>
+                          <span class="genres-label">${translatedGenres}</span>
+                          <span class="rating">${movie.rating}</span>
+                        </li>`;
             }).join("")
             : "<li>Немає фільмів</li>";
     }

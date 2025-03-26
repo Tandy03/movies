@@ -54,7 +54,7 @@ export const moviesList = [
     { title: "Бетмен проти Супермена: На зорі справедливості", genre: ["fantasy", "action", "movie"], rating: 9.19 },
     { title: "Гравітація (2013)", genre: ["sci-fi", "drama", "movie"], rating: 9.19 },
     { title: "Встигнути до", genre: ["drama", "comedy", "movie"], rating: 9.19 },
-    { title: "God friended me", genre: ["christian", "drama", "series", "fantasy"], rating: 9.1 },
+    { title: "God friended me (c, 1-2)", genre: ["christian", "drama", "series", "fantasy"], rating: 9.1 },
     { title: "Абатство Даунтон: Нова епоха", genre: ["history", "drama", "movie"], rating: 9.1 },
     { title: "21 міст", genre: ["crime", "action", "movie"], rating: 9.1 },
     { title: "Дюна", genre: ["fantasy", "sci-fi", "movie"], rating: 9.1 },
