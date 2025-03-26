@@ -1,4 +1,5 @@
 import moviesList from "./movies.js";
+//add alphabetic sorting
 
 document.addEventListener("DOMContentLoaded", () => {
     const movieListElement = document.getElementById("moviesList");
@@ -54,10 +55,10 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderMovies() {
         const movies = filterMovies();
         movieListElement.innerHTML = movies.length
-            ? movies.map(movie => {
+            ? movies.map((movie, idx) => {
                 const translatedGenres = movie.genre.map(g => genreTranslations[g] || g).join(", ");
                 return `<li>
-                          <span class="movie-title">${movie.title}</span>
+                          <span class="movie-title">${idx + 1}. ${movie.title}</span>
                           <span class="genres-label">${translatedGenres}</span>
                           <span class="rating">${movie.rating}</span>
                         </li>`;
