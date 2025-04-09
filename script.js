@@ -1,4 +1,5 @@
 import moviesList from "./movies.js";
+import {imdb} from "./imdb";
 
 document.addEventListener("DOMContentLoaded", () => {
   const movieListElement = document.getElementById("moviesList");
@@ -77,7 +78,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateGenreFilter() {
     let genres = new Set(moviesList.flatMap((movie) => movie.genre));
 
-    if (currentCategory === "movie") {
+    if (currentCategory === "all") {
+      genres = new Set(
+          [...genres].filter(
+              (genre) => !["movie", "series", "cartoon", "anime"].includes(genre)
+          )
+      );
+    } else if (currentCategory === "movie") {
       genres = new Set(
         [...genres].filter(
           (genre) => !["movie", "series", "cartoon", "anime"].includes(genre)
