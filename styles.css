@@ -20,7 +20,7 @@ h1 {
 }
 
 #sort-button-hidden {
-  opacity: 0;
+  display: none;
 }
 
 nav {
