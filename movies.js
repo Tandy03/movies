@@ -1,4 +1,4 @@
-export const moviesList = [
+const moviesList = [
   { title: "Меню (2022)", genre: ["drama", "thriller", "movie"], rating: 10 },
   { title: "Дощовий день у Нью-Йорку", genre: ["drama", "movie"], rating: 9.9 },
   { title: "Абатство Даунтон (с, 1-6)", genre: ["history", "drama", "series"], rating: 9.8 },
