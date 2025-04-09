@@ -1,93 +1,130 @@
-import { moviesList } from './movies.js';
+import moviesList from "./movies.js";
 
-const movieListElement = document.getElementById("movie-list");
-const sortButton = document.getElementById("sort-button");
-const tabButtons = document.querySelectorAll(".tab-button");
+document.addEventListener("DOMContentLoaded", () => {
+  const movieListElement = document.getElementById("moviesList");
+  const genreFilter = document.getElementById("genreFilter");
+  const sortToggle = document.getElementById("sortToggle");
+  const tabButtons = document.querySelectorAll(".tabs button");
 
-let currentTab = "general";
-let isAscending = false;
-
-const genreNames = {
-    "drama": "Драма/Мелодрама",
-    "thriller": "Трилер",
-    "fantasy": "Фентезі",
-    "christian": "Християнські",
-    "history": "Історичні/Документальні",
+  const genreTranslations = {
+    drama: "Драма/Мелодрама",
+    thriller: "Трилер",
+    fantasy: "Фентезі",
+    christian: "Християнські",
+    history: "Історичні/Документальні",
     "sci-fi": "Наукова фантастика",
-    "action": "Екшн",
-    "crime": "Кримінальні/Детективи",
-    "comedy": "Комедія",
-    "horror": "Жахи"
-};
+    action: "Екшн",
+    crime: "Кримінальні/Детективи",
+    comedy: "Комедія",
+    horror: "Жахи",
+    movie: "Фільми",
+    series: "Серіали",
+    cartoon: "Мультфільми",
+    anime: "Аніме",
+  };
 
-function renderMovies(movies) {
-    movieListElement.innerHTML = "";
-    movies.forEach(movie => {
-        const li = document.createElement("li");
-        li.innerHTML = `<div class="list-item"><span>${movie.title}</span><span>⭐ ${movie.rating || "N/A"}</span></div>`;
-        movieListElement.appendChild(li);
-    });
-}
+  let currentCategory = "all";
+  let isAscending = false;
 
-function getFilteredMovies(tab) {
-    switch (tab) {
-        case "by-genres":
-            return Object.keys(genreNames).map(genre => ({
-                title: genreNames[genre],
-                genre
-            }));
-        case "movies":
-            return moviesList.filter(movie => movie.type === "movie");
-        case "cartoons":
-            return moviesList.filter(movie => movie.type === "cartoon" || movie.type === "anime");
-        default:
-            return moviesList;
+  function filterMovies() {
+    let filteredMovies = moviesList.filter(
+      (movie) =>
+        currentCategory === "all" || movie.genre.includes(currentCategory)
+    );
+
+    const selectedGenreKey = genreFilter.value;
+    if (selectedGenreKey !== "all") {
+      filteredMovies = filteredMovies.filter((movie) => {
+        if (currentCategory === "cartoon" && selectedGenreKey === "cartoon") {
+          return (
+            movie.genre.includes("cartoon") && !movie.genre.includes("anime")
+          );
+        }
+        return movie.genre.includes(selectedGenreKey);
+      });
     }
-}
 
-function handleTabChange(tab) {
-    currentTab = tab;
-    const filteredMovies = getFilteredMovies(tab);
-    
-    if (tab === "by-genres") {
-        renderGenres(filteredMovies);
-    } else {
-        renderMovies(sortMovies(filteredMovies));
+    if (isAscending) {
+      filteredMovies = filteredMovies.filter((movie) => movie.rating > 0);
     }
-}
 
-function renderGenres(genres) {
-    movieListElement.innerHTML = "";
-    genres.forEach(({ title, genre }) => {
-        const button = document.createElement("button");
-        button.textContent = title;
-        button.classList.add("genre-button");
-        button.addEventListener("click", () => {
-            const filteredMovies = moviesList.filter(movie => movie.genre.includes(genre));
-            renderMovies(sortMovies(filteredMovies));
-        });
-        movieListElement.appendChild(button);
+    return filteredMovies.sort((a, b) => {
+      if (!isAscending) return b.rating - a.rating;
+      return a.rating - b.rating;
     });
-}
+  }
 
-function sortMovies(movies) {
-    return [...movies].sort((a, b) => {
-        if (!a.rating || !b.rating) return 0;
-        return isAscending ? a.rating - b.rating : b.rating - a.rating;
-    });
-}
+  function renderMovies() {
+    const movies = filterMovies();
+    movieListElement.innerHTML = movies.length
+      ? movies
+          .map((movie, idx) => {
+            const translatedGenres = movie.genre
+              .map((g) => genreTranslations[g] || g)
+              .join(", ");
+            return `<li>
+                          <span class="movie-title">${idx + 1}. ${
+              movie.title
+            }</span>
+                          <span class="genres-label">${translatedGenres}</span>
+                          <span class="rating">${movie.rating}</span>
+                        </li>`;
+          })
+          .join("")
+      : "<li>Немає фільмів</li>";
+  }
 
-sortButton.addEventListener("click", () => {
-    isAscending = !isAscending;
-    handleTabChange(currentTab);
-});
+  function updateGenreFilter() {
+    let genres = new Set(moviesList.flatMap((movie) => movie.genre));
 
-tabButtons.forEach(button => {
+    if (currentCategory === "movie") {
+      genres = new Set(
+        [...genres].filter(
+          (genre) => !["movie", "series", "cartoon", "anime"].includes(genre)
+        )
+      );
+    } else if (currentCategory === "cartoon") {
+      genres = new Set(
+        [...genres].filter((genre) =>
+          ["series", "cartoon", "anime"].includes(genre)
+        )
+      );
+    } else if (currentCategory === "series") {
+      genres = new Set(
+        [...genres].filter((genre) => !["movie", "series"].includes(genre))
+      );
+    }
+
+    genreFilter.innerHTML =
+      '<option value="all">Всі жанри</option>' +
+      [...genres]
+        .map(
+          (genre) =>
+            `<option value="${genre}">${
+              genreTranslations[genre] || genre
+            }</option>`
+        )
+        .join("");
+  }
+
+  tabButtons.forEach((button) => {
     button.addEventListener("click", () => {
-        tabButtons.forEach(btn => btn.classList.remove("active"));
-        button.classList.add("active");
-        handleTabChange(button.dataset.tab);
+      tabButtons.forEach((btn) => btn.classList.remove("active"));
+      button.classList.add("active");
+      currentCategory = button.dataset.category;
+      updateGenreFilter();
+      renderMovies();
     });
-});
+  });
 
-handleTabChange("general");
+  genreFilter.addEventListener("change", renderMovies);
+
+  sortToggle.addEventListener("click", () => {
+    isAscending = !isAscending;
+    sortToggle.textContent = isAscending ? "⬇️" : "⬆️";
+    renderMovies();
+  });
+
+  updateGenreFilter();
+  renderMovies();
+});
