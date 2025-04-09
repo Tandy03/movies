@@ -1,5 +1,4 @@
 import moviesList from "./movies.js";
-import {imdb} from "./imdb";
 
 document.addEventListener("DOMContentLoaded", () => {
   const movieListElement = document.getElementById("moviesList");
