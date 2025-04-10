@@ -1,4 +1,5 @@
 import moviesList from "./movies.js";
+import imdb from "./imdb.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const movieListElement = document.getElementById("moviesList");
@@ -56,8 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function renderMovies() {
     const movies = filterMovies();
-    movieListElement.innerHTML = movies.length
-      ? movies
+    movieListElement.innerHTML = movies
           .map((movie, idx) => {
             const translatedGenres = movie.genre
               .map((g) => genreTranslations[g] || g)
@@ -70,8 +70,22 @@ document.addEventListener("DOMContentLoaded", () => {
                           <span class="rating">${movie.rating}</span>
                         </li>`;
           })
-          .join("")
-      : "<li>Немає фільмів</li>";
+          .join("");
+  }
+
+  function renderImdbMovies() {
+    movieListElement.innerHTML = imdb.length
+        ? imdb
+            .map((movie, idx) => {
+              return `<li class = "imdb-li">
+                   <span class="movie-title-imdb">${idx + 1}. ${movie.title} (${movie.year})</span>
+                   <span class="imdb-rating">IMDB: ${movie.imdb}</span>
+                   <span class="rating">Рейтинг: ${movie.rating}</span>
+                   <span class="watched">${movie.watched ? '✔' : '✖'}</span>
+                 </li>`;
+            })
+            .join("")
+        : "<li>Немає фільмів у списку IMDB-250</li>";
   }
 
   function updateGenreFilter() {
@@ -117,9 +131,25 @@ document.addEventListener("DOMContentLoaded", () => {
     button.addEventListener("click", () => {
       tabButtons.forEach((btn) => btn.classList.remove("active"));
       button.classList.add("active");
+
+      const filtersBlock = document.querySelector(".filters") || document.querySelector(".filters-hidden");
+
       currentCategory = button.dataset.category;
-      updateGenreFilter();
-      renderMovies();
+
+      if (currentCategory === "imdb") {
+        if (filtersBlock && filtersBlock.classList.contains("filters")) {
+          filtersBlock.classList.remove("filters");
+          filtersBlock.classList.add("filters-hidden");
+        }
+        renderImdbMovies();
+      } else {
+        if (filtersBlock && filtersBlock.classList.contains("filters-hidden")) {
+          filtersBlock.classList.remove("filters-hidden");
+          filtersBlock.classList.add("filters");
+        }
+        updateGenreFilter();
+        renderMovies();
+      }
     });
   });
 

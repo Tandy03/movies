@@ -45,6 +45,10 @@ h1 {
   margin: 10px 0;
 }
 
+.filters-hidden {
+  display: none;
+}
+
 #genreFilter,
 #sortToggle {
   padding: 8px;
@@ -105,6 +109,26 @@ li .rating {
 
 #movieIcon {
   margin-bottom: -0.15rem;
+}
+
+.movie-title-imdb {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.imdb-li {
+  display: grid;
+  grid-template-columns: 58% 16% 16% 10%;
+  gap: 10px;
+  text-align: left;
+}
+
+.imdb-rating {
+  text-align: right;
+}
+
+.watched {
+  padding-bottom: 0.2rem;
 }
 
 @media (min-width: 500px) {
