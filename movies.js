@@ -1,5 +1,5 @@
 const moviesList = [
-  { title: "Меню (2022)", genre: ["drama", "thriller", "movie"], rating: 9.9 },
+  { title: "Меню (2022)", genre: ["drama", "thriller", "movie"], rating: 9.99 },
   { title: "Дощовий день у Нью-Йорку", genre: ["drama", "movie"], rating: 9.9 },
   { title: "Абатство Даунтон (с, 1-6)", genre: ["history", "drama", "series"], rating: 9.8 },
   { title: "Прекрасні створіння (2013)", genre: ["fantasy", "movie", "drama"], rating: 9.8 },
