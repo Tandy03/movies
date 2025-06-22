@@ -1,5 +1,4 @@
 const moviesList = [
-  { title: "Меню (2022)", genre: ["drama", "thriller", "movie"], rating: 9.99 },
   { title: "Дощовий день у Нью-Йорку", genre: ["drama", "movie"], rating: 9.9 },
   { title: "Абатство Даунтон (с, 1-6)", genre: ["history", "drama", "series"], rating: 9.8 },
   { title: "Прекрасні створіння (2013)", genre: ["fantasy", "movie", "drama"], rating: 9.8 },
@@ -53,6 +52,7 @@ const moviesList = [
   { title: "13/Тринадцять", genre: ["drama", "crime", "movie"], rating: 9.19 },
   { title: "Бетмен проти Супермена: На зорі справедливості", genre: ["fantasy", "action", "movie"], rating: 9.19 },
   { title: "Гравітація (2013)", genre: ["sci-fi", "drama", "movie"], rating: 9.19 },
+  { title: "Меню (2022)", genre: ["drama", "thriller", "movie"], rating: 9.99 },
   { title: "Встигнути до", genre: ["drama", "comedy", "movie"], rating: 9.19 },
   { title: "God friended me (c, 1-2)", genre: ["christian", "drama", "series", "fantasy"], rating: 9.1 },
   { title: "Абатство Даунтон: Нова епоха", genre: ["history", "drama", "movie"], rating: 9.1 },
