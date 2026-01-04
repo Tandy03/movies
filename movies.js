@@ -1412,7 +1412,7 @@ const moviesList = [
   { title: "Індіана Джонс і Храм Долі", genre: ["crime", "history", "movie"], rating: 7.69 },
   { title: "Аватар: вогонь і попіл", genre: ["sci-fi", "action", "movie"], rating: 8.09 },
   { title: "Всесвітній потоп", genre: ["sci-fi", "drama", "thriller", "movie"], rating: 8 },
-  { title: "Форма води", genre: ["fantasy", "drama", "movie"], rating: 0 },
+  { title: "Форма води", genre: ["fantasy", "drama", "movie"], rating: 0 }
 ];
 
 export default moviesList;
